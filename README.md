@@ -96,7 +96,7 @@ Now that you've seen the workflow, you'll notice it references secrets like `${{
 
 ### Step 1: Add Repository Secrets
 
-1. Go to your infra repository: `https://github.com/zenpharma/infra`
+1. Go to your infra repository: `https://github.com/kkpaul2091/infra`
 2. Click **Settings** (you need admin access)
 3. In the left sidebar, expand **Secrets and variables** and click **Actions**
 4. You'll see two tabs at the top: **Secrets** and **Variables**
