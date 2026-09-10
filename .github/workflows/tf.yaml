@@ -2,7 +2,10 @@ name: Terraform Infrastructure
 # PR to main        → plan only
 # Push/merge to main → plan (auto) → approval gate → apply
 # Manual dispatch    → plan, apply, or destroy dev environment
+<<<<<<< HEAD
 #
+=======
+>>>>>>> c8992e3 (dev: TF WF  at:  Thursday, September 10, 2026 at 11:57 AM)
 on:
   push:
     branches: [main]
