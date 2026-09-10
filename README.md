@@ -18,8 +18,7 @@ git remote add origin https://kkpaul2091@github.com/kkpaul2091/infra.git
 git push -u origin main
 ```
 ## Enable Branch Protection and Approval Process
-### Step 1: Protect the Main Branch
-```bash
+## 2.4 Enable Branch Protection and Approval Process
 
 Right now, anyone can push directly to `main`, which triggers an immediate apply. That's dangerous — a typo could destroy production infrastructure. We need two safety layers:
 
@@ -66,4 +65,3 @@ Right now, anyone can push directly to `main`, which triggers an immediate apply
    - **Require a pull request before merging** (set required approvals to **0**)
 9. Click **Create**
 
-```
