@@ -1,6 +1,6 @@
 # ZenPharma Dev Environment — managed via GitHub Actions CI/CD # By KKP 006 007 008
 locals {
-  project = "pharma"
+  project = "pharma-dev"
   env     = "dev"
   region  = "ap-southeast-2"
 }
