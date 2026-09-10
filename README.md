@@ -82,4 +82,76 @@ GitHub Environments provide **deployment protection rules** — most importantly
 > **Why a `dev` environment with approval?** Our workflow's apply job has `environment: dev`. When this job runs, GitHub sees the environment protection rules and pauses the workflow. A notification is sent to the required reviewers. Only after a reviewer clicks "Approve and deploy" does the apply job proceed. This gives you a final checkpoint to review the plan output before applying changes to real infrastructure.
 >
 > **In a real team setup**, you would add senior engineers or a platform team as reviewers. For this course, you are both the author and the reviewer.
+## 2.3 Adding Secrets and Variables to GitHub
 
+Now that you've seen the workflow, you'll notice it references secrets like `${{ secrets.AWS_ACCESS_KEY_ID }}` and variables like `${{ vars.GH_ORG }}`. These need to be configured in GitHub before the workflow can run. GitHub provides two mechanisms: **Secrets** (encrypted, hidden in logs) and **Variables** (plaintext, visible in logs).
+
+### Understanding Secrets vs. Variables
+
+> **Secrets** are for sensitive values like passwords and access keys. They are encrypted at rest, never shown in workflow logs (GitHub automatically masks them), and cannot be read back after being set — only overwritten.
+>
+> **Variables** are for non-sensitive configuration like region names, bucket names, and organization names. They are stored in plaintext, visible in logs, and can be read back in the GitHub UI.
+>
+> **Rule of thumb:** If you would be uncomfortable seeing the value in a public build log, use a secret. Otherwise, use a variable.
+
+### Step 1: Add Repository Secrets
+
+1. Go to your infra repository: `https://github.com/zenpharma/infra`
+2. Click **Settings** (you need admin access)
+3. In the left sidebar, expand **Secrets and variables** and click **Actions**
+4. You'll see two tabs at the top: **Secrets** and **Variables**
+5. On the **Secrets** tab, click **New repository secret**
+
+**Secret 1: AWS_ACCESS_KEY_ID**
+- Name: `AWS_ACCESS_KEY_ID`
+- Secret: Paste your IAM user's Access Key ID (from Module 1.1)
+- Click **Add secret**
+
+**Secret 2: AWS_SECRET_ACCESS_KEY**
+- Name: `AWS_SECRET_ACCESS_KEY`
+- Secret: Paste your IAM user's Secret Access Key
+- Click **Add secret**
+
+**Secret 3: DEV_DB_PASSWORD**
+- Name: `DEV_DB_PASSWORD`
+- Secret: A strong password for your dev database (e.g., `MyDevDb#2025!Secure`)
+- Click **Add secret**
+
+> **Important:** Use a strong password with uppercase, lowercase, numbers, and special characters. AWS RDS rejects weak passwords. Do NOT use quotes or backslashes in the password — they can cause escaping issues in shell commands.
+
+**Secret 4: DEV_JWT_SECRET**
+- Name: `DEV_JWT_SECRET`
+- Secret: A random string for JWT signing (e.g., `dev-jwt-secret-zenpharma-2025`)
+- Click **Add secret**
+
+You should now see 4 secrets listed:
+
+```
+AWS_ACCESS_KEY_ID       Updated just now
+AWS_SECRET_ACCESS_KEY   Updated just now
+DEV_DB_PASSWORD         Updated just now
+DEV_JWT_SECRET          Updated just now
+```
+> **Why static access keys instead of OIDC?** The ideal approach for GitHub Actions to access AWS is through OIDC federation — no static credentials to rotate. However, OIDC federation requires a GitHub Actions OIDC provider configured in IAM. Our Module 1 IAM module created this provider, but to use it we'd need to configure `aws-actions/configure-aws-credentials` with a role ARN and `role-to-assume`. For simplicity in this course, we use static access keys. In a production environment, you would use OIDC.
+
+### Step 2: Add Repository Variables
+
+1. On the same page (**Settings** > **Secrets and variables** > **Actions**), click the **Variables** tab
+2. Click **New repository variable**
+
+**Variable 1: GH_ORG**
+- Name: `GH_ORG`
+- Value: Your GitHub username or organization name (e.g., `zenpharma`)
+- Click **Add variable**
+
+**Variable 2: TF_STATE_BUCKET**
+- Name: `TF_STATE_BUCKET`
+- Value: Your S3 bucket name from Module 1.4 (e.g., `zen-pharma-terraform-state-<your-name>`)
+- Click **Add variable**
+
+You should now see 2 variables listed:
+
+```
+GH_ORG              zenpharma
+TF_STATE_BUCKET     zen-pharma-terraform-state-<your-name>
+```
