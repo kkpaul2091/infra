@@ -207,3 +207,69 @@ gh pr create \
   --body "Trigger the Terraform GitHub Actions workflow to verify the pipeline works end-to-end." \
   --base main
 ```
+### Connect to the EKS Cluster Locally
+```bash
+# List clusters 
+aws eks list-clusters
+
+# Update local kubeconfig
+aws eks update-kubeconfig \
+  --region ap-southeast-2 \
+  --name pharma-dev-dev-cluster
+
+# Verify connection
+kubectl get nodes
+# Should show 3 nodes in Ready state
+
+kubectl get namespaces
+# Should show default, kube-system, kube-public, kube-node-lease
+```
+## 3.2 Add Bootstrap Scripts to the Infra Repo
+
+The infra repo needs a set of Python scripts that automate cluster setup tasks (installing Helm charts, configuring ArgoCD, setting up External Secrets). These scripts are provided as part of the course materials.
+
+### Step 1: Create the Scripts Directory
+
+```bash
+cd ~/devops/zenpharma/infra
+git checkout -b feat/bootstrap-scripts
+mkdir -p scripts
+```
+
+### Step 2: Copy the Scripts
+
+Copy all 6 scripts from the course reference materials into your infra repo:
+
+```bash
+cp /d01/MyWork/1/K8s/NATIVE/TF/aws-k8s-basic-setup-CKA/03MAIN/scripts/01_install_prerequisites.py scripts/
+cp /d01/MyWork/1/K8s/NATIVE/TF/aws-k8s-basic-setup-CKA/03MAIN/scripts/02_bootstrap_argocd.py scripts/
+cp /d01/MyWork/1/K8s/NATIVE/TF/aws-k8s-basic-setup-CKA/03MAIN/scripts/03_setup_external_secrets.py scripts/
+cp /d01/MyWork/1/K8s/NATIVE/TF/aws-k8s-basic-setup-CKA/03MAIN/scripts/04_run_pipeline.py scripts/
+cp /d01/MyWork/1/K8s/NATIVE/TF/aws-k8s-basic-setup-CKA/03MAIN/scripts/05_deploy_services.py scripts/
+cp /d01/MyWork/1/K8s/NATIVE/TF/aws-k8s-basic-setup-CKA/03MAIN/scripts/06_verify_deployment.py scripts/
+```
+
+> **Note:** Replace `/path/to/course-materials/scripts/` with the actual location where the course instructor has provided these files. They may be available as a downloadable zip or in a shared repository.
+
+
+### Step 3: Verify and Push
+
+```bash
+ls scripts/
+# Expected: 01_install_prerequisites.py  02_bootstrap_argocd.py  03_setup_external_secrets.py
+#           04_run_pipeline.py  05_deploy_services.py  06_verify_deployment.py
+
+cd ~/devops/zenpharma/infra
+git add scripts
+git commit -m "Adding bootstrap scripts"
+git push origin feat/bootstrap-scripts
+```
+Raise a pull request to commit changes onto main. As we are doing changes outside of `envs/dev` and `modules/` it wont trigger a pipeline.
+
+> **Tag `infra` repo: `module-3.2-bootstrap-scripts`**
+> ```bash
+> cd ~/devops/zenpharma/infra
+> git tag -a module-3.2-bootstrap-scripts -m "Module 3.2: Add bootstrap scripts to infra repo"
+> git push origin module-3.2-bootstrap-scripts
+> ```
+
