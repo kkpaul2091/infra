@@ -65,3 +65,21 @@ Right now, anyone can push directly to `main`, which triggers an immediate apply
    - **Require a pull request before merging** (set required approvals to **0**)
 9. Click **Create**
 
+### Step 2: Create the GitHub Environment
+
+GitHub Environments provide **deployment protection rules** — most importantly, required reviewers. When a workflow job references an environment, it pauses and waits for an approved reviewer to click "Approve" before continuing.
+
+1. Go to your infra repository: `https://github.com/kkpaul2091/infra`
+2. Click **Settings**
+3. In the left sidebar, click **Environments** (under "Code and automation")
+4. Click **New environment**
+5. Name: `dev`
+6. Click **Configure environment**
+7. Under **Deployment protection rules**, check **Required reviewers**
+8. In the search box, add yourself (your GitHub username) as a reviewer
+9. Click **Save protection rules**
+
+> **Why a `dev` environment with approval?** Our workflow's apply job has `environment: dev`. When this job runs, GitHub sees the environment protection rules and pauses the workflow. A notification is sent to the required reviewers. Only after a reviewer clicks "Approve and deploy" does the apply job proceed. This gives you a final checkpoint to review the plan output before applying changes to real infrastructure.
+>
+> **In a real team setup**, you would add senior engineers or a platform team as reviewers. For this course, you are both the author and the reviewer.
+
