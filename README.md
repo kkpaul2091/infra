@@ -155,3 +155,55 @@ You should now see 2 variables listed:
 GH_ORG              zenpharma
 TF_STATE_BUCKET     zen-pharma-terraform-state-<your-name>
 ```
+## 2.5 Run Terraform Through GitHub Actions
+
+Now let's test the full workflow by pushing a change through the CI pipeline.
+
+### Step 1: Create a Feature Branch
+
+Since we enabled branch protection, we can no longer push directly to `main`. All changes must go through a pull request.
+
+```bash
+cd /d01/MyWork/1/K8s/ZENPHARMA/infra
+git checkout -b feat/trigger-ci
+```
+
+### Step 2: Make a Small Change
+
+We need to change a file under `envs/dev/` or `modules/` to trigger the workflow (path filtering). Let's add a comment to the main Terraform configuration:
+
+```bash
+code /d01/MyWork/1/K8s/ZENPHARMA/infra/envs/dev/main.tf
+```
+
+Add a comment at the top of the file:
+
+```hcl
+# ZenPharma Dev Environment — managed via GitHub Actions CI/CD
+locals {
+  project = "pharma"
+  env     = "dev"
+  region  = "ap-southeast-2"
+}
+...
+```
+
+### Step 3: Commit and Push the Feature Branch
+
+```bash
+cd /d01/MyWork/1/K8s/ZENPHARMA/infra
+git add envs/dev/main.tf
+git commit -m "ci: trigger initial CI pipeline run"
+git push origin feat/trigger-ci
+```
+
+### Step 4: Create a Pull Request
+
+**Option A — GitHub CLI:**
+
+```bash
+gh pr create \
+  --title "ci: trigger initial terraform CI pipeline" \
+  --body "Trigger the Terraform GitHub Actions workflow to verify the pipeline works end-to-end." \
+  --base main
+```
