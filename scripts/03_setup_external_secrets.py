@@ -128,7 +128,7 @@ AWS_REGION     = prompt("AWS_REGION", "AWS region where your Secrets Manager sec
                         "ap-southeast-2")
 AWS_ACCOUNT_ID = prompt("AWS_ACCOUNT_ID",
                         "AWS account ID (12-digit number - find it in the top-right of the AWS console, or run: aws sts get-caller-identity --query Account --output text)",
-                        "022499019288")
+                        "489661996455")
 
 default_role   = f"pharma-{ENV}-eso-role"
 ESO_ROLE_NAME  = prompt("ESO_ROLE_NAME",

@@ -143,17 +143,17 @@ print()
 ENV             = prompt_choice("ENV", "Target environment (choose the namespace to deploy applications to)",
                                 ["dev", "qa", "prod"])
 GITOPS_REPO_URL = prompt("GITOPS_REPO_URL", "GitOps repository HTTPS URL",
-                          "https://github.com/srpaul2091/gitops.git")
+                          "https://github.com/kkpaul2091/gitops.git")
 
 print(f"\n{CYAN}  NOTE: Enter your personal GitHub username, not the organization name.")
 print(f"        GitHub authenticates users, not organizations. Your PAT grants")
 print(f"        access to the org's repos because you are a member.{NC}\n")
 
 GITHUB_USERNAME = prompt("GITHUB_USERNAME", "Your personal GitHub username",
-                          "srpaul2091", "ravdsun")
+                          "kkpaul2091", "srpaul2091")
 GITOPS_TOKEN    = prompt_secret("GITOPS_TOKEN",
                                 "GitHub Personal Access Token with read access to gitops",
-                                "github__XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+                                "github_read access to gitopsXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
 default_gitops = os.path.join(DEFAULT_PROJECT_ROOT, "gitops")
 GITOPS_PATH     = prompt("GITOPS_PATH", "Local path to your gitops repo",
