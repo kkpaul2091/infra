@@ -2,7 +2,7 @@ variable "db_password" {
   description = "Master password for the RDS PostgreSQL database"
   type        = string
   sensitive   = true
-  default     = "MyP#ssword123"
+  default     = "MyDevDb#2025!Secure"
 
 }
 
@@ -10,7 +10,7 @@ variable "jwt_secret" {
   description = "JWT signing secret for the application"
   type        = string
   sensitive   = true
-  default     = "MyP#ssword123"
+  default     = "dev-jwt-secret-kkpaul2091-2027"
 }
 
 variable "github_org" {
