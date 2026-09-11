@@ -106,12 +106,12 @@ print("       (arn:aws:iam::<account-id>:role/<project>-<env>-alb-controller-rol
 print()
 
 CLUSTER_NAME        = prompt("CLUSTER_NAME",        "EKS cluster name",
-                             "pharma-dev-cluster", "pharma-dev-cluster")
+                             "pharma-dev-dev-cluster", "pharma-dev-dev-cluster")
 AWS_REGION          = prompt("AWS_REGION",          "AWS region where the cluster is deployed",
                              "ap-southeast-2", "ap-southeast-2")
 ALB_CONTROLLER_ROLE = prompt("ALB_CONTROLLER_ROLE", "IAM role ARN for the AWS Load Balancer Controller",
                              "arn:aws:iam::<aws-account-id>:role/pharma-dev-alb-controller-role",
-                             "arn:aws:iam::873135413040:role/pharma-dev-alb-controller-role")
+                             "arn:aws:iam::489661996455:role/pharma-dev-dev-alb-controller-role")
 
 default_gitops = os.path.join(DEFAULT_PROJECT_ROOT, "gitops")
 GITOPS_PATH         = prompt("GITOPS_PATH",         "Local path to your gitops repo",
