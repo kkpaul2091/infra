@@ -130,10 +130,10 @@ AWS_ACCOUNT_ID = prompt("AWS_ACCOUNT_ID",
                         "AWS account ID (12-digit number - find it in the top-right of the AWS console, or run: aws sts get-caller-identity --query Account --output text)",
                         "489661996455")
 
-default_role   = f"pharma-{ENV}-eso-role"
+default_role   = f"pharma-{ENV}-{ENV}-eso-role"
 ESO_ROLE_NAME  = prompt("ESO_ROLE_NAME",
                         "ESO IAM role name (created by Terraform - check 'Terraform Apply' output or AWS IAM console)",
-                        "pharma-dev-eso-role", default_role)
+                        "pharma-dev-dev-eso-role", default_role)
 
 ESO_ROLE_ARN = f"arn:aws:iam::{AWS_ACCOUNT_ID}:role/{ESO_ROLE_NAME}"
 
