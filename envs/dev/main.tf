@@ -1,4 +1,4 @@
-# ZenPharma Dev Environment — managed via GitHub Actions CI/CD # By KKP 22092026
+
 locals {
   project = "pharma"
   env     = "dev"
