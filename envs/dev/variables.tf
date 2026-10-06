@@ -1,6 +1,16 @@
 variable "project_id" {
   type = string
 }
+
+variable "region" {
+  type = string
+}
+variable "github_org" {
+  type = string
+}
+variable "jwt_secret" {
+  type = string
+}
 variable "env" {
   description = "Environment name (dev, qa, prod)"
   type        = string
