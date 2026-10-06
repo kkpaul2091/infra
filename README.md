@@ -25,5 +25,13 @@ gcloud projects get-iam-policy ${PROJECT_ID} \
   --filter="bindings.members:terraform-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
   --format="table(bindings.role)"
 ```
-
+```doc
+ROLE
+roles/artifactregistry.admin
+roles/compute.networkAdmin
+roles/container.admin
+roles/editor
+roles/iam.serviceAccountAdmin
+roles/secretmanager.admin
+```
 
