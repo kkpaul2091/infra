@@ -15,3 +15,15 @@ git status
 git commit -m "INFRA : $(date '+ %A, %B %d, %Y at %I:%M %p')"
 git push origin feat/setup
 ```
+## check project-level roles:
+
+```bash 
+PROJECT_ID=$(gcloud config get-value project)
+
+gcloud projects get-iam-policy ${PROJECT_ID} \
+  --flatten="bindings[].members" \
+  --filter="bindings.members:terraform-sa@${PROJECT_ID}.iam.gserviceaccount.com" \
+  --format="table(bindings.role)"
+```
+
+

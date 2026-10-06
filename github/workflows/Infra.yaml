@@ -1,0 +1,116 @@
+name: Terraform Infrastructure - GKE
+
+# PR to main         -> plan only
+# Push/merge to main -> plan -> approval gate -> apply
+# Manual dispatch    -> plan, apply, or destroy dev environment
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "envs/dev/**"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "envs/dev/**"
+
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Terraform action"
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+
+      confirm_destroy:
+        description: 'Type "destroy" to confirm destruction'
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  TF_VERSION: "1.15.6"
+  GOOGLE_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  GOOGLE_REGION: ${{ vars.GCP_REGION }}
+  TF_IN_AUTOMATION: "true"
+
+concurrency:
+  group: terraform-gke-dev
+  cancel-in-progress: false
+
+jobs:
+
+  plan:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+
+    if: |
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.action != 'destroy'
+
+    defaults:
+      run:
+        working-directory: envs/dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ env.GOOGLE_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_TERRAFORM_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -input=false \
+            -lock-timeout=5m
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        run: |
+          terraform plan \
+            -input=false \
+            -lock-timeout=5m \
+            -var="project_id=${{ env.GOOGLE_PROJECT_ID }}" \
+            -var="region=${{ env.GOOGLE_REGION }}" \
+            -var="github_org=${{ vars.GH_ORG }}" \
+            -var="db_password=${{ secrets.DEV_DB_PASSWORD }}" \
+            -var="jwt_secret=${{ secrets.DEV_JWT_SECRET }}" \
+            -out=tfplan \
+            -no-color
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v6
+        with:
+          name: tfplan-${{ github.run_id }}
+          path: envs/dev/tfplan
+          retention-days: 1
