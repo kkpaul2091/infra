@@ -5,7 +5,7 @@ terraform {
       version = "~> 7.0"
     }
   }
- 
+
   backend "gcs" {
     bucket = "kkp-myschool-tfstate"
     prefix = "myschool-gke-dev"

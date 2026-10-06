@@ -13,9 +13,9 @@ resource "google_container_cluster" "my_school_cluster" {
 }
 
 resource "google_container_node_pool" "primary_nodes" {
-  name       = "my-school-node-pool"
-  location   = google_container_cluster.my_school_cluster.location
-  cluster    = google_container_cluster.my_school_cluster.name
+  name     = "my-school-node-pool"
+  location = google_container_cluster.my_school_cluster.location
+  cluster  = google_container_cluster.my_school_cluster.name
 
   initial_node_count = 1
 
@@ -27,14 +27,14 @@ resource "google_container_node_pool" "primary_nodes" {
   node_config {
     machine_type = "e2-standard-2"
     disk_size_gb = 40
-    disk_type = "pd-balanced"
+    disk_type    = "pd-balanced"
 
-  labels = {
+    labels = {
       environment = "dev"
       project     = "my-school"
       owner       = "kanu"
       workload    = "general"
-      managed_by = "terraform"
+      managed_by  = "terraform"
     }
 
     oauth_scopes = [

@@ -2,8 +2,8 @@ resource "google_artifact_registry_repository" "docker_repo" {
   project       = var.project_id
   location      = "australia-southeast2"
   repository_id = "my-school-repo"
-  description = "Docker repository for My School application images"
-  format = "DOCKER"
+  description   = "Docker repository for My School application images"
+  format        = "DOCKER"
 }
 
 # GKE Pull Access

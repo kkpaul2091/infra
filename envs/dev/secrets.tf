@@ -21,10 +21,10 @@ resource "google_secret_manager_secret_version" "db_credentials" {
     host     = var.db_host */
     # you can also hardcode the values here, but it's better to use variables for sensitive data
     rdsinstance = "mytestinstance.crskg446i66j.ap-southeast-2.rds.amazonaws.com"
-    dbport = "3306"
-    dbname = "MRPSKP"
-    username = "admin"
-    password = "SreMre34#"
+    dbport      = "3306"
+    dbname      = "MRPSKP"
+    username    = "admin"
+    password    = "SreMre34#"
 
   })
 }
