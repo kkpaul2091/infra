@@ -35,8 +35,10 @@ on:
         default: ""
 
 permissions:
-  contents: read
-  id-token: write
+  contents: read # Allows GitHub to read the repository contents for checkout and artifact upload/download
+  id-token: write # Allows GitHub to generate:
+    # - a short-lived OIDC token for workload identity federation
+    # - a short-lived GCP access token for the Terraform service account
 
 env:
   TF_VERSION: "1.15.6"
@@ -177,3 +179,57 @@ jobs:
             -no-color \
             tfplan
 
+  destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.action == 'destroy' &&
+      github.event.inputs.confirm_destroy == 'destroy'
+
+    environment: dev
+
+    defaults:
+      run:
+        working-directory: envs/dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ env.GOOGLE_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_TERRAFORM_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -input=false \
+            -lock-timeout=5m
+
+      - name: Terraform Destroy
+        run: |
+          terraform destroy \
+            -input=false \
+            -lock-timeout=5m \
+            -var="project_id=${{ env.GOOGLE_PROJECT_ID }}" \
+            -var="region=${{ env.GOOGLE_REGION }}" \
+            -var="github_org=${{ vars.GH_ORG }}" \
+            -var="db_password=${{ secrets.DEV_DB_PASSWORD }}" \
+            -var="jwt_secret=${{ secrets.DEV_JWT_SECRET }}" \
+            -auto-approve \
+            -no-color
