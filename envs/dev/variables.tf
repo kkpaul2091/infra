@@ -4,12 +4,15 @@ variable "project_id" {
 
 variable "region" {
   type = string
+  default     ="australia-southeast2"
 }
 variable "github_org" {
   type = string
+  default     ="kkpaul2091"
 }
 variable "jwt_secret" {
   type = string
+  default     ="kanu-shadana-mrema-srejoy-17-ascot-avenue-vale-park-sa-5081"
 }
 variable "env" {
   description = "Environment name (dev, qa, prod)"
