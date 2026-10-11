@@ -65,6 +65,13 @@ jobs:
         working-directory: envs/dev
 
     steps:
+      - name: Show Actor Info
+        run: |
+          echo "Actor: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Ref Name: ${{ github.ref_name }}"
+          echo "Event: ${{ github.event_name }}"
       - name: Checkout repository
         uses: actions/checkout@v5
 
