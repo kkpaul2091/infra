@@ -50,6 +50,11 @@ variable "admin_members" {
   default     = []
 }
 
+variable "location" {
+  type    = string
+  default = "australia-southeast2"
+}
+
 /*
 Artifact Registry
 │

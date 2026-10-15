@@ -23,7 +23,16 @@ output "cluster_id" {
   description = "Cluster ID"
   value       = google_container_cluster.my_school_cluster.id
 }
+output "artifact_registry_repository" {
+  description = "Artifact Registry repository ID"
+  value       = module.artifact_registry.repository_id
+}
 
+output "artifact_registry_url" {
+  description = "Artifact Registry Docker repository URL"
+  value       = module.artifact_registry.repository_url
+}
+/*
 output "artifact_registry_repository" {
   value = google_artifact_registry_repository.docker_repo.repository_id
 }
@@ -31,6 +40,7 @@ output "artifact_registry_repository" {
 output "artifact_registry_url" {
   value = "${google_artifact_registry_repository.docker_repo.location}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.docker_repo.repository_id}"
 }
+*/
 /*
 output "mysql_private_ip" {
   value = google_sql_database_instance.mysql.private_ip_address
