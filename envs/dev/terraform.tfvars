@@ -14,3 +14,18 @@ admin_members = [
   "group:platform-admins@example.com"
 ]
 */
+
+env        = "tst"
+
+db_host = "mytestinstance.crskg446i66j.ap-southeast-2.rds.amazonaws.com"
+db_port = "3306"
+db_name = "MRPSKP"
+
+#db_username = "..."
+#db_password = "..."
+
+mongodb_db_name  = "mytododb"
+mongodb_host     = "cluster0.mp3lyec.mongodb.net"
+mongodb_app_name = "Cluster0"
+#mongodb_username = "..."
+#mongodb_password = "..."
