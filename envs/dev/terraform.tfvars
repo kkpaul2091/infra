@@ -15,7 +15,7 @@ admin_members = [
 ]
 */
 
-env        = "tst"
+env = "tst"
 
 db_host = "mytestinstance.crskg446i66j.ap-southeast-2.rds.amazonaws.com"
 db_port = "3306"
