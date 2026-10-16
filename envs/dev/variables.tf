@@ -30,6 +30,7 @@ variable "db_password" {
   description = "Database password"
   type        = string
   default     = "SreMre34#"
+  sensitive   = true
 }
 
 variable "gke_service_accounts" {
@@ -55,18 +56,48 @@ variable "location" {
   default = "australia-southeast2"
 }
 
-/*
-Artifact Registry
-│
-├── GKE Nodes
-│     └── Reader
-│
-├── GitHub Actions
-│     └── Writer
-│
-├── ArgoCD
-│     └── Reader
-│
-└── Platform Team
-      └── Admin
-*/
+
+
+
+variable "db_host" {
+  type = string
+}
+
+variable "db_port" {
+  type    = string
+  default = "3306"
+}
+
+variable "db_name" {
+  type = string
+}
+
+variable "db_username" {
+  type      = string
+  sensitive = true
+}
+
+
+
+variable "mongodb_username" {
+  type      = string
+  sensitive = true
+}
+
+variable "mongodb_password" {
+  type      = string
+  sensitive = true
+}
+
+variable "mongodb_db_name" {
+  type = string
+}
+
+variable "mongodb_host" {
+  type = string
+}
+
+variable "mongodb_app_name" {
+  type    = string
+  default = "Cluster0"
+}

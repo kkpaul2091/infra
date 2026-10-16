@@ -46,6 +46,11 @@ env:
   GOOGLE_REGION: ${{ vars.GCP_REGION }}
   TF_IN_AUTOMATION: "true"
 
+  TF_VAR_db_username: ${{ secrets.DB_USERNAME }}
+  TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
+  TF_VAR_mongodb_username: ${{ secrets.MONGODB_USERNAME }}
+  TF_VAR_mongodb_password: ${{ secrets.MONGODB_PASSWORD }}
+
 concurrency:
   group: terraform-gke-dev
   cancel-in-progress: false
