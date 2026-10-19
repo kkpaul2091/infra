@@ -1,0 +1,35 @@
+module "vpc" {
+  source = "../../modules/vpc"
+
+  project_id = var.project_id
+  vpc_name   = "myschool-vpc"
+
+  routing_mode = "REGIONAL"
+
+  subnets = {
+    myschool-gke-subnet = {
+      region        = "australia-southeast2"
+      ip_cidr_range = "10.10.0.0/20"
+
+      private_ip_google_access = true
+
+      secondary_ip_ranges = [
+        {
+          range_name    = "gke-pods"
+          ip_cidr_range = "10.20.0.0/16"
+        },
+        {
+          range_name    = "gke-services"
+          ip_cidr_range = "10.30.0.0/20"
+        }
+      ]
+    }
+
+    myschool-db-subnet = {
+      region        = "australia-southeast2"
+      ip_cidr_range = "10.40.0.0/24"
+
+      private_ip_google_access = true
+    }
+  }
+}

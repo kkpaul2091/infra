@@ -101,3 +101,70 @@ variable "mongodb_app_name" {
   type    = string
   default = "Cluster0"
 }
+
+
+variable "cluster_name" {
+  type = string
+}
+
+variable "location_zone" {
+  type = string
+}
+
+variable "deletion_protection" {
+  type    = bool
+  default = false
+}
+
+variable "release_channel" {
+  type    = string
+  default = "REGULAR"
+}
+
+variable "node_pool_name" {
+  type = string
+}
+
+variable "initial_node_count" {
+  type    = number
+  default = 1
+}
+
+variable "min_node_count" {
+  type    = number
+  default = 1
+}
+
+variable "max_node_count" {
+  type    = number
+  default = 2
+}
+
+variable "machine_type" {
+  type    = string
+  default = "e2-standard-2"
+}
+
+variable "disk_size_gb" {
+  type    = number
+  default = 40
+}
+
+variable "disk_type" {
+  type    = string
+  default = "pd-balanced"
+}
+
+variable "node_labels" {
+  type = map(string)
+}
+
+variable "auto_repair" {
+  type    = bool
+  default = true
+}
+
+variable "auto_upgrade" {
+  type    = bool
+  default = true
+}

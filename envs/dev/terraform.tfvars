@@ -1,6 +1,7 @@
 project_id = "project-4961abc8-49a2-4442-aef"
 
-location = "australia-southeast2"
+location      = "australia-southeast2"
+location_zone = "australia-southeast2-a"
 /*
 gke_service_accounts = [
   "myschool-dev-gke@project-4961abc8-49a2-4442-aef.iam.gserviceaccount.com"
@@ -29,3 +30,31 @@ mongodb_host     = "cluster0.mp3lyec.mongodb.net"
 mongodb_app_name = "Cluster0"
 #mongodb_username = "..."
 #mongodb_password = "..."
+
+cluster_name = "my-school-cluster"
+
+
+deletion_protection = false
+release_channel     = "REGULAR"
+
+node_pool_name     = "my-school-node-pool"
+initial_node_count = 1
+
+min_node_count = 1
+max_node_count = 2
+
+machine_type = "e2-standard-2"
+
+disk_size_gb = 40
+disk_type    = "pd-balanced"
+
+node_labels = {
+  environment = "dev"
+  project     = "my-school"
+  owner       = "kanu"
+  workload    = "general"
+  managed_by  = "terraform"
+}
+
+auto_repair  = true
+auto_upgrade = true

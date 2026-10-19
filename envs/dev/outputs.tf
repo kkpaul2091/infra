@@ -1,27 +1,28 @@
 output "cluster_name" {
   description = "GKE Cluster Name"
-  value       = google_container_cluster.my_school_cluster.name
+  value       = module.gke.cluster_name
 }
 
 output "cluster_endpoint" {
   description = "GKE API Endpoint"
-  value       = google_container_cluster.my_school_cluster.endpoint
+  value       = module.gke.cluster_endpoint
+  sensitive   = true
 }
 
 output "cluster_location" {
   description = "Cluster Region/Zone"
-  value       = google_container_cluster.my_school_cluster.location
+  value       = module.gke.cluster_location
 }
 
 output "cluster_ca_certificate" {
   description = "Cluster CA Certificate"
-  value       = google_container_cluster.my_school_cluster.master_auth[0].cluster_ca_certificate
+  value       = module.gke.cluster_ca_certificate
   sensitive   = true
 }
 
 output "cluster_id" {
   description = "Cluster ID"
-  value       = google_container_cluster.my_school_cluster.id
+  value       = module.gke.cluster_id
 }
 output "artifact_registry_repository" {
   description = "Artifact Registry repository ID"
