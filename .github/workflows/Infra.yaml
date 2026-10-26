@@ -56,6 +56,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  myschool:
+    name: Workflow Information
+    runs-on: ubuntu-latest
+    steps:
+      - name: Workflow information
+        run: |
+          echo "Username :  ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch    : ${{ github.ref_name }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Event     : ${{ github.event_name }}"
 
   plan:
     name: Terraform Plan

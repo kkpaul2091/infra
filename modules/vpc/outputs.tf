@@ -13,7 +13,18 @@ output "vpc_self_link" {
   value       = google_compute_network.vpc.self_link
 }
 
+
 output "subnets" {
-  description = "Created subnet resources"
-  value       = google_compute_subnetwork.subnets
+  description = "Created subnet information"
+
+  value = {
+    for name, subnet in google_compute_subnetwork.subnets : name => {
+      id            = subnet.id
+      name          = subnet.name
+      region        = subnet.region
+      ip_cidr_range = subnet.ip_cidr_range
+      network       = subnet.network
+      self_link     = subnet.self_link
+    }
+  }
 }
