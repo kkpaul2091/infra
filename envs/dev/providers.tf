@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket = "kkp-myschool-tfstate"
+    bucket = "srp-myschool-tfstate"
     prefix = "myschool-gke-dev"
   }
 

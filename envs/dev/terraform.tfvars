@@ -1,4 +1,5 @@
-project_id = "project-4961abc8-49a2-4442-aef"
+project_id = "project-c2779828-d28b-45b8-810"
+# project_id = project-4961abc8-49a2-4442-aef
 
 location      = "australia-southeast2"
 location_zone = "australia-southeast2-a"
@@ -51,7 +52,7 @@ disk_type    = "pd-balanced"
 node_labels = {
   environment = "dev"
   project     = "my-school"
-  owner       = "kanu"
+  owner       = "shadana"
   workload    = "general"
   managed_by  = "terraform"
 }
