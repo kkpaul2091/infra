@@ -1,4 +1,4 @@
-name: Terraform Infrastructure - GKE
+name: Terraform Infrastructure - GKE 
 
 # PR to main         -> plan only
 # Push/merge to main -> plan -> approval gate -> apply
