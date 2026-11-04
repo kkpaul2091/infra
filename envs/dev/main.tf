@@ -105,7 +105,6 @@ module "gke" {
 
   auto_repair  = var.auto_repair
   auto_upgrade = var.auto_upgrade
-
-
 }
+
 
