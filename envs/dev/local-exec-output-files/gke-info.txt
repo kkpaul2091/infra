@@ -10,8 +10,8 @@ GKE Cluster Name: my-school-cluster  created on: Sun Oct 04 08:36:22 PM ACDT 202
 GKE Cluster Name: my-school-cluster  created on: Mon Oct 05 01:23:38 PM ACDT 2026 
 GKE Cluster Name: my-school-cluster  created on: Mon Oct 07 01:23:38 PM ACDT 2026 
 GKE Cluster Name: my-school-cluster  created on: Mon Oct 07 10:23:38 PM ACDT 2026 
-GKE Cluster Name: my-school-cluster  created on: Sunday, October 11, 2026 at 11:59 AM
-GKE Cluster Name: my-school-cluster  created on: Sunday, October 11, 2026 at 06:23 PM
+GKE Cluster Name: my-school-cluster  created on: Sun Oct 11, 2026 at 11:59 AM
+GKE Cluster Name: my-school-cluster  created on: Sun Oct 11, 2026 at 06:23 PM
 GKE Cluster Name: my-school-cluster  created on: Tue Oct 13 08:48:04 PM ACDT 2026 
 GKE Cluster Name: my-school-cluster  created on: Thu Oct 15 09:37:23 AM ACDT 2026 
 GKE Cluster Name: my-school-cluster  created on: Fri Oct 16 01:46:16 PM ACDT 2026 
@@ -26,6 +26,6 @@ GKE Cluster Name: my-school-cluster  created on: Tue Oct 27 08:13:23 AM ACDT 202
 GKE Cluster Name: my-school-cluster  created on: Thu Oct 29 10:02:40 AM ACDT 2026 
 GKE Cluster Name: my-school-cluster  created on: Tue Nov  3 09:24:45 AM ACDT 2026
 GKE Cluster Name: my-school-cluster  created on: Mon Nov  9 08:47:09 AM ACDT 2026
-GKE Cluster Name: my-school-cluster  created on: Mon Nov  10 08:47:09 AM ACDT 2026
+GKE Cluster Name: my-school-cluster  created on: Mon Nov 10 08:47:09 AM ACDT 2026
 GKE Cluster Name: my-school-cluster  created on: Wed Nov 11 08:32:01 AM ACDT 2026
 GKE Cluster Name: my-school-cluster  created on: Thu Nov 12 01:41:21 PM ACDT 2026 
