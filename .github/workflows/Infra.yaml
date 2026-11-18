@@ -67,6 +67,9 @@ jobs:
           echo "Branch    : ${{ github.ref_name }}"
           echo "Commit SHA: ${{ github.sha }}"
           echo "Event     : ${{ github.event_name }}"
+          echo "Run ID    : ${{ github.run_id }}"
+          echo "Run URL   : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "Workflow  : ${{ github.workflow }}"
 
   plan:
     name: Terraform Plan
