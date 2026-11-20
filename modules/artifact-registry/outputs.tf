@@ -22,3 +22,20 @@ output "repository_url" {
     google_artifact_registry_repository.docker_repo.repository_id
   )
 }
+
+output "readers" {
+  description = "Service accounts with Artifact Registry reader access"
+
+  value = [
+    for reader in google_artifact_registry_repository_iam_member.gke_reader :
+    reader.member
+  ]
+}
+
+output "writers" {
+  description = "Service accounts with Artifact Registry writer access"
+  value = [
+    for writer in google_artifact_registry_repository_iam_member.cicd_writer :
+    writer.member
+  ]
+}
