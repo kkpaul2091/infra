@@ -59,3 +59,8 @@ node_labels = {
 
 auto_repair  = true
 auto_upgrade = true
+/*
+gke_service_accounts = [
+  "terraform-sa@project-c2779828-d28b-45b8-810.iam.gserviceaccount.com"
+]
+*/

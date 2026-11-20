@@ -24,6 +24,7 @@ output "cluster_id" {
   description = "Cluster ID"
   value       = module.gke.cluster_id
 }
+# Outputs for Artifact Registry module
 output "artifact_registry_repository" {
   description = "Artifact Registry repository ID"
   value       = module.artifact_registry.repository_id
@@ -33,21 +34,22 @@ output "artifact_registry_url" {
   description = "Artifact Registry Docker repository URL"
   value       = module.artifact_registry.repository_url
 }
-/*
-output "artifact_registry_repository" {
-  value = google_artifact_registry_repository.docker_repo.repository_id
+output "artifact_registry_location" {
+  description = "Artifact Registry location"
+  value       = module.artifact_registry.repository_location
 }
 
-output "artifact_registry_url" {
-  value = "${google_artifact_registry_repository.docker_repo.location}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.docker_repo.repository_id}"
-}
-*/
-/*
-output "mysql_private_ip" {
-  value = google_sql_database_instance.mysql.private_ip_address
+output "artifact_registry_name" {
+  description = "Artifact Registry name"
+  value       = module.artifact_registry.repository_name
 }
 
-output "mysql_connection_name" {
-  value = google_sql_database_instance.mysql.connection_name
+output "artifact_registry_readers" {
+  description = "Service accounts with Artifact Registry reader access"
+  value       = module.artifact_registry.readers
 }
-*/
+
+output "artifact_registry_writers" {
+  description = "Service accounts with Artifact Registry writer access"
+  value       = module.artifact_registry.writers
+}
