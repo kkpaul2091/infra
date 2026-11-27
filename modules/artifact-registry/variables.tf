@@ -8,12 +8,12 @@ variable "location" {
   type        = string
   default     = "australia-southeast2"
 }
-
+/*
 variable "repository_id" {
   description = "Artifact Registry repository ID"
   type        = string
 }
-
+*/
 variable "description" {
   description = "Description of the Artifact Registry repository"
   type        = string
@@ -42,4 +42,9 @@ variable "admin_members" {
   description = "Members requiring Artifact Registry admin access"
   type        = list(string)
   default     = []
+}
+
+variable "repositories" {
+  description = "Artifact Registry repositories to create"
+  type        = set(string)
 }

@@ -58,23 +58,34 @@ module "secret_manager" {
 }
 
 # Artifact Registry
-
+/*
 module "artifact_registry" {
   source = "../../modules/artifact-registry"
 
   project_id    = var.project_id
   location      = var.location
-  repository_id = "my-school-repo"
 
+  repository_id = "my-school-repo"
   description = "Docker repository for My School application images"
 
   gke_service_accounts = var.gke_service_accounts
-
   cicd_service_accounts = var.cicd_service_accounts
-
   admin_members = var.admin_members
 }
+*/
+module "artifact_registry" {
+  source = "../../modules/artifact-registry"
 
+  project_id = var.project_id
+  location   = var.location
+  format     = "DOCKER"
+
+  repositories = var.repositories
+
+  gke_service_accounts  = var.gke_service_accounts
+  cicd_service_accounts = var.cicd_service_accounts
+  admin_members         = var.admin_members
+}
 # GKE
 module "gke" {
   source = "../../modules/gke"

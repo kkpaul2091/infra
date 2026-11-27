@@ -24,6 +24,7 @@ output "cluster_id" {
   description = "Cluster ID"
   value       = module.gke.cluster_id
 }
+/*
 # Outputs for Artifact Registry module
 output "artifact_registry_repository" {
   description = "Artifact Registry repository ID"
@@ -43,7 +44,30 @@ output "artifact_registry_name" {
   description = "Artifact Registry name"
   value       = module.artifact_registry.repository_name
 }
+*/
+# Artifact Registry Repository IDs
+output "artifact_registry_repositories" {
+  description = "Artifact Registry repository IDs"
+  value       = module.artifact_registry.repository_ids
+}
 
+# Artifact Registry Repository URLs
+output "artifact_registry_urls" {
+  description = "Artifact Registry repository URLs"
+  value       = module.artifact_registry.repository_urls
+}
+
+# Artifact Registry Repository Locations
+output "artifact_registry_locations" {
+  description = "Artifact Registry repository locations"
+  value       = module.artifact_registry.repository_locations
+}
+
+# Artifact Registry Repository Names
+output "artifact_registry_names" {
+  description = "Artifact Registry repository names"
+  value       = module.artifact_registry.repository_names
+}
 output "artifact_registry_readers" {
   description = "Service accounts with Artifact Registry reader access"
   value       = module.artifact_registry.readers

@@ -168,3 +168,8 @@ variable "auto_upgrade" {
   type    = bool
   default = true
 }
+
+variable "repositories" {
+  description = "Artifact Registry repositories"
+  type        = set(string)
+}
